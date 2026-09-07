@@ -27,13 +27,13 @@ a rubrica a partir das fontes e roda a avaliação.
   oficiais byte a byte, e cinco autotestes travam o resultado
 
 ```bash
-git clone https://github.com/migueldsants/AI-Skills-ENEM.git
+git clone https://github.com/migueldsants/AI-Skill-Corretor-Redacao-ENEM.git
 
 # opção 1 — diretório comum a todos os agentes
-ln -s "$PWD/AI-Skills-ENEM/skills/corretor-redacao-enem" ~/.agents/skills/corretor-redacao-enem
+ln -s "$PWD/AI-Skill-Corretor-Redacao-ENEM/skills/corretor-redacao-enem" ~/.agents/skills/corretor-redacao-enem
 
 # opção 2 — direto no Claude
-ln -s "$PWD/AI-Skills-ENEM/skills/corretor-redacao-enem" ~/.claude/skills/corretor-redacao-enem
+ln -s "$PWD/AI-Skill-Corretor-Redacao-ENEM/skills/corretor-redacao-enem" ~/.claude/skills/corretor-redacao-enem
 ```
 
 Escolha uma das duas. Para Windows, para instalação só num projeto e para o
