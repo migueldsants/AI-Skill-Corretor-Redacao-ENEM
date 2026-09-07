@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+
+# Artefatos de execução do harness: notas cruas, relatórios, rodadas.
+results/
+
+# Texto de redação real. Tudo aqui é derivado dos PDFs oficiais e regenerável
+# pelos scripts da skill — não entra no versionamento.
+oficial/redacoes/
+datasets/
+.work/
+
+# Redações pessoais: as folhas do Enem trazem CPF e número de inscrição.
+para-corrigir/
