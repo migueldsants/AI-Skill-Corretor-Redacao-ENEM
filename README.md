@@ -2,7 +2,6 @@
   <img src="https://img.shields.io/badge/license-MIT-22c55e?style=flat-square" alt="License">
   <img src="https://img.shields.io/badge/agente%20de%20IA-skill-7C3AED?style=flat-square" alt="Skill para agentes de IA">
   <img src="https://img.shields.io/badge/python-3.11+-0891b2?style=flat-square" alt="Python">
-  <img src="https://img.shields.io/badge/corpus-37%20reda%C3%A7%C3%B5es-f59e0b?style=flat-square" alt="Corpus">
   <img src="https://img.shields.io/badge/fonte-Inep%20oficial-0ea5e9?style=flat-square" alt="Fonte oficial">
 </p>
 
@@ -23,8 +22,8 @@ a rubrica a partir das fontes e roda a avaliação.
   que impede uma nota alta em C2 puxar a C3
 - **Calibrada contra o próprio Inep** — 22 comentários de avaliador(a) sobre
   redações nota 1.000 fixam quantos desvios a Competência I de fato tolera
-- **Reprodutível de ponta a ponta** — a rubrica e o corpus se regeram dos PDFs
-  oficiais byte a byte, e cinco autotestes travam o resultado
+- **Reprodutível de ponta a ponta** — a rubrica se regera dos PDFs oficiais
+  byte a byte, e cinco autotestes travam o resultado
 
 ```bash
 git clone https://github.com/migueldsants/AI-Skill-Corretor-Redacao-ENEM.git
@@ -162,27 +161,17 @@ precisa entrar: tudo é derivado dos PDFs oficiais e regenerável pelos scripts.
 
 | Caminho | O que é | Como recriar |
 |---|---|---|
-| `oficial/redacoes/` | as 37 redações comentadas, uma por JSON | `scripts/tools/extrair_redacoes.py` |
-| `datasets/` | as 416 ablações | `scripts/eval/ablate.py` |
+| `oficial/redacoes/` | as redações comentadas das Cartilhas, uma por JSON | `scripts/tools/extrair_redacoes.py` |
+| `datasets/` | as ablações derivadas | `scripts/eval/ablate.py` |
 | `results/` | notas cruas e relatórios de cada rodada | `scripts/eval/run.py` |
 | `para-corrigir/` | redações pessoais — as folhas do Enem trazem CPF e número de inscrição | não se recria; nunca deve ser versionado |
 
-O corpus regenerado é byte a byte o mesmo: `scripts/tests/test_corpus.py` verifica
-a integridade e `scripts/tests/test_referencias.py` trava a rubrica contra o
-render em imagem das páginas.
+O material regenerado é byte a byte o mesmo: `scripts/tests/test_corpus.py`
+verifica a integridade e `scripts/tests/test_referencias.py` trava a rubrica
+contra o render em imagem das páginas.
 
-## Corpus
-
-| Cartilha | Edição do Enem | Redações | Notas publicadas |
-|---|---|---|---|
-| 2022 | 2021 | 7 | ✅ 1.000 |
-| 2023 | 2022 | 10 | ✅ 1.000 |
-| 2024 | 2023 | 10 | ✅ 1.000 |
-| 2025 | 2024 | 10 | — |
-
-28 redações rotuladas, 37 no total, todas com o comentário do(a) avaliador(a) do
-Inep. 416 ablações derivadas. As redações são identificadas por edição da
-Cartilha e índice — nem aqui nem em `references/` aparece nome de participante.
+As redações extraídas são identificadas por edição da Cartilha e índice — nem
+nelas nem em `references/` aparece nome de participante.
 
 ## Como rodar
 
@@ -192,7 +181,7 @@ Tudo a partir da raiz do projeto. `$S` encurta o caminho da skill.
 python -m pip install pymupdf     # única dependência; o resto é stdlib
 S=skills/corretor-redacao-enem/scripts
 
-# reproduzir a rubrica e o corpus a partir dos PDFs oficiais
+# reproduzir a rubrica e o material derivado dos PDFs oficiais
 for Y in 2022 2023 2024 2025; do
   python $S/tools/extrair_redacoes.py oficial/pdfs/cartilha_$Y.pdf $Y
 done
