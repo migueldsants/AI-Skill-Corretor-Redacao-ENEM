@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-"""Executa a skill pelo harness do Claude Code e grava as notas por competência.
+"""Executa a skill pelo harness do agente e grava as notas por competência.
 
-A skill NÃO bate na API. Quem a executa é o `claude -p`, que carrega o
+A skill NÃO bate na API. Quem a executa é o CLI do agente, que carrega o
 SKILL.md, resolve `references/` e aplica a rubrica. Reimplementar os prompts
 como chamadas de SDK mediria o reimplementador, não a skill.
 
@@ -27,7 +27,7 @@ COMPETENCIAS = ["c1", "c2", "c3", "c4", "c5"]
 NIVEIS = [0, 40, 80, 120, 160, 200]
 
 # Medido numa invocação real (Opus, uma competência, redação de ~3,4 mil chars):
-# US$ 0,24 e ~41 s. O grosso é o prompt de sistema do próprio Claude Code, que
+# US$ 0,24 e ~41 s. O grosso é o prompt de sistema do próprio agente, que
 # entra em cache entre chamadas — a estimativa é teto, não piso.
 USD_POR_INVOCACAO = 0.24
 

@@ -165,7 +165,7 @@ nesses casos em vez de fingir precisão.
 
 ## Padronização
 
-Esta skill roda dentro do Claude Code, que não expõe controle de amostragem —
+Esta skill roda dentro de um agente de IA, que não expõe controle de amostragem —
 não há `temperature` para zerar. A consistência vem de quatro escolhas:
 
 1. O descritor é **citado literalmente**, não parafraseado.
