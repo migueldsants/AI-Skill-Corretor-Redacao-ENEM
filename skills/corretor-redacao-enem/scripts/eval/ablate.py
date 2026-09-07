@@ -207,6 +207,14 @@ def main():
     a = ap.parse_args()
 
     arquivos = sorted(pathlib.Path(a.entrada).glob("*.json"))
+    if not arquivos:
+        # O corpus e derivado dos PDFs e nao e versionado (e texto de redacao
+        # real). Sem ele a saida seria um dataset vazio que passa silenciosamente
+        # e quebra os portoes la na frente; falha aqui, com a receita.
+        print("FALHOU corpus ausente em", a.entrada, file=sys.stderr)
+        print("  gere com: python .../scripts/tools/extrair_redacoes.py "
+              "oficial/pdfs/cartilha_<ano>.pdf <ano>", file=sys.stderr)
+        return 1
     if a.somente_rotuladas:
         arquivos = [f for f in arquivos if not f.name.startswith("2025-")]
     if a.amostra_bases and a.amostra_bases < len(arquivos):

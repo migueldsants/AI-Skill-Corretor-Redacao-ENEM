@@ -16,9 +16,18 @@ COMPS = rp.COMPS
 # O dataset de ablações é derivado (não versionado): gera na primeira execução.
 _DS = RAIZ / "datasets" / "ablacoes.jsonl"
 if not _DS.exists():
-    subprocess.run([sys.executable, str(SCRIPTS / "eval" / "ablate.py")],
-                   cwd=RAIZ, check=True, capture_output=True)
+    _p = subprocess.run([sys.executable, str(SCRIPTS / "eval" / "ablate.py")],
+                        cwd=RAIZ, capture_output=True, text=True, encoding="utf-8")
+    if _p.returncode != 0:
+        # Sem corpus nao ha ablacao: repassa a receita do ablate.py em vez de
+        # seguir com um dataset vazio e estourar num KeyError opaco la embaixo.
+        print("FALHOU nao foi possivel gerar", _DS)
+        print((_p.stderr or _p.stdout or "").rstrip())
+        sys.exit(1)
 ABL = [json.loads(l) for l in open(_DS, encoding="utf-8")]
+if not ABL:
+    print("FALHOU dataset de ablacoes vazio em", _DS)
+    sys.exit(1)
 
 
 def resultado(reg, notas):
